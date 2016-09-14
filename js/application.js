@@ -16,5 +16,8 @@ window.onload = function() {
   mesh.position.set(5, 0, 0);
   scene.add(mesh);
 
+  var light = new THREE.AmbientLight(0xffffff);
+  scene.add(light);
+
   renderer.render(scene, camera);
 }
