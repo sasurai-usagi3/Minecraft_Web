@@ -7,8 +7,6 @@ var Block = function(blockName) {
   }
   this.name = blockName;
   this.material = new THREE.MultiMaterial(materials);
-
-  return this;
 }
 
 Block.prototype.getMaterial = function() {
