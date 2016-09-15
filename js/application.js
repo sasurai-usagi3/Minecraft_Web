@@ -1,5 +1,7 @@
 window.onload = function() {
   var posX = 0, posY = 0, posZ = 0;
+  var yaw = 0, pitch = 0;
+  var SightX, SightY, SightZ;
   var renderer = new THREE.WebGLRenderer({antialias: true});
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(40, 800 / 480);
@@ -9,7 +11,7 @@ window.onload = function() {
     requestAnimationFrame(updateCanvas);
 
     camera.position.set(posX, posY + 1.6, posZ);
-    camera.lookAt(new THREE.Vector3(posX + 7, posY, posZ));
+    camera.lookAt(new THREE.Vector3(posX + SightX, posY + 1.6 + SightY, posZ + SightZ));
     renderer.render(scene, camera);
   }
   
@@ -46,6 +48,25 @@ window.onload = function() {
     } else if(e.keyCode == 68) {
       posZ += 0.1;
     }
+  }
+
+  document.onmousemove = function(e) {
+    var deltaX = e.momentX || e.webkitMovementX || e.mozMovementX;
+    var deltaY = e.momentY || e.webkitMovementY || e.mozMovementY;
+    var radian = Math.PI / 180;
+
+    yaw += deltaX / 0.8;
+    pitch -= deltaY / 0.8;
+
+    if(pitch > 90) {
+      pitch = 90;
+    } else if(pitch < -90) {
+      pitch = -90;
+    }
+
+    SightX = Math.cos(radian * pitch) * Math.cos(radian * yaw);
+    SightY = Math.sin(radian* pitch);
+    SightZ = Math.cos(radian * pitch) * Math.sin(radian * yaw);
   }
 
   updateCanvas(); 
