@@ -3,8 +3,8 @@ window.onload = function() {
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(40, 800 / 480);
   var cube = new THREE.CubeGeometry(1, 1, 1);
-  var block1 = new Block("block1");
-  var mesh = new THREE.Mesh(cube, block1.getMaterial());
+  var dirt = new BlockDirt();
+  var mesh = new THREE.Mesh(cube, dirt.getMaterial());
   var light = new THREE.AmbientLight(0xffffff);
   var updateCanvas = function() {
     requestAnimationFrame(updateCanvas);
