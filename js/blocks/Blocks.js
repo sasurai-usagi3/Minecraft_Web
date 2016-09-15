@@ -1,5 +1,7 @@
 var Blocks = {
-  dirt: new BlockDirt()
+  dirt: new BlockDirt(),
+  rock: new BlockRock(),
+  bedrock: new BlockBedrock()
 }
 
 for(var blockName in Blocks) {
