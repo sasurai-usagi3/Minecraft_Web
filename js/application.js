@@ -40,13 +40,13 @@ window.onload = function() {
 
   document.onkeydown = function(e) {
     if(e.keyCode == 87) {
-      posX += 0.1;
+      posX += 0.3;
     } else if(e.keyCode == 65) {
-      posZ -= 0.1;
+      posZ -= 0.3;
     } else if(e.keyCode == 83) {
-      posX -= 0.1;
+      posX -= 0.3;
     } else if(e.keyCode == 68) {
-      posZ += 0.1;
+      posZ += 0.3;
     }
   }
 
