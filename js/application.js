@@ -2,6 +2,7 @@ window.onload = function() {
   var posX = 0, posY = 0, posZ = 0;
   var yaw = 0, pitch = 0;
   var SightX, SightY, SightZ;
+  var moveX = 1, moveZ = 0;
   var renderer = new THREE.WebGLRenderer({antialias: true});
   var scene = new THREE.Scene();
   var camera = new THREE.PerspectiveCamera(40, 800 / 480);
@@ -40,13 +41,17 @@ window.onload = function() {
 
   document.onkeydown = function(e) {
     if(e.keyCode == 87) {
-      posX += 0.3;
+      posX += 0.3 * moveX;
+      posZ += 0.3 * moveZ;
     } else if(e.keyCode == 65) {
-      posZ -= 0.3;
+      posX += 0.3 * moveZ;
+      posZ -= 0.3 * moveX;
     } else if(e.keyCode == 83) {
-      posX -= 0.3;
+      posX -= 0.3 * moveX;
+      posZ -= 0.3 * moveZ;
     } else if(e.keyCode == 68) {
-      posZ += 0.3;
+      posX -= 0.3 * moveZ;
+      posZ += 0.3 * moveX;
     }
   }
 
@@ -67,6 +72,8 @@ window.onload = function() {
     SightX = Math.cos(radian * pitch) * Math.cos(radian * yaw);
     SightY = Math.sin(radian* pitch);
     SightZ = Math.cos(radian * pitch) * Math.sin(radian * yaw);
+    moveX = Math.cos(radian * yaw);
+    moveZ = Math.sin(radian * yaw);
   }
 
   updateCanvas(); 
