@@ -52,6 +52,10 @@ window.onload = function() {
     } else if(e.keyCode == 68) {
       posX -= 0.3 * moveZ;
       posZ += 0.3 * moveX;
+    } else if(e.keyCode == 32 && e.shiftKey) {
+      posY -= 0.3;
+    } else if(e.keyCode == 32) {
+      posY += 0.3;
     }
   }
 
