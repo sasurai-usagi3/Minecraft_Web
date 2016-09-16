@@ -56,8 +56,8 @@ window.onload = function() {
   }
 
   document.onmousemove = function(e) {
-    var deltaX = e.momentX || e.webkitMovementX || e.mozMovementX;
-    var deltaY = e.momentY || e.webkitMovementY || e.mozMovementY;
+    var deltaX = e.momentX || e.webkitMovementX || e.mozMovementX || e.movementX;
+    var deltaY = e.momentY || e.webkitMovementY || e.mozMovementY || e.movementY;
     var radian = Math.PI / 180;
 
     yaw += deltaX / 0.8;
