@@ -1,7 +1,7 @@
 window.onload = function() {
   var posX = 0, posY = 0, posZ = 0;
   var yaw = 0, pitch = 0;
-  var SightX, SightY, SightZ;
+  var SightX = 1, SightY = 0, SightZ = 0;
   var moveX = 1, moveZ = 0;
   var renderer = new THREE.WebGLRenderer({antialias: true});
   var scene = new THREE.Scene();
