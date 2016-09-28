@@ -1,7 +1,7 @@
 window.onload = () => {
   let [posX, posY, posZ] = [0, 0, 0];
   let [yaw, pitch] = [0, 0];
-  let [SightX, SightY, SightZ] = [1, 0, 0];
+  let [sightX, sightY, sightZ] = [1, 0, 0];
   let [moveX, moveZ] = [1, 0];
   let renderer = new THREE.WebGLRenderer({antialias: true});
   let scene = new THREE.Scene();
@@ -12,7 +12,7 @@ window.onload = () => {
     requestAnimationFrame(updateCanvas);
 
     camera.position.set(posX, posY + 1.6, posZ);
-    camera.lookAt(new THREE.Vector3(posX + SightX, posY + 1.6 + SightY, posZ + SightZ));
+    camera.lookAt(new THREE.Vector3(posX + sightX, posY + 1.6 + sightY, posZ + sightZ));
     renderer.render(scene, camera);
   }
   
@@ -73,7 +73,7 @@ window.onload = () => {
       pitch = -90;
     }
 
-    [SightX, SightY, SightZ] = [Math.cos(radian * pitch) * Math.cos(radian * yaw), Math.sin(radian* pitch), Math.cos(radian * pitch) * Math.sin(radian * yaw)];
+    [sightX, sightY, sightZ] = [Math.cos(radian * pitch) * Math.cos(radian * yaw), Math.sin(radian* pitch), Math.cos(radian * pitch) * Math.sin(radian * yaw)];
     [moveX, moveZ] = [Math.cos(radian * yaw), Math.sin(radian * yaw)];
   }
 
