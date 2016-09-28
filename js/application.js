@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = () => {
   let posX = 0, posY = 0, posZ = 0;
   let yaw = 0, pitch = 0;
   let SightX = 1, SightY = 0, SightZ = 0;
@@ -8,7 +8,7 @@ window.onload = function() {
   let camera = new THREE.PerspectiveCamera(40, 800 / 480);
   let cube = new THREE.CubeGeometry(1, 1, 1);
   let light = new THREE.AmbientLight(0xffffff);
-  let updateCanvas = function() {
+  let updateCanvas = () => {
     requestAnimationFrame(updateCanvas);
 
     camera.position.set(posX, posY + 1.6, posZ);
@@ -39,7 +39,7 @@ window.onload = function() {
 
   scene.add(light);
 
-  document.onkeydown = function(e) {
+  document.onkeydown = (e) => {
     if(e.keyCode == 87) {
       posX += 0.3 * moveX;
       posZ += 0.3 * moveZ;
@@ -59,7 +59,7 @@ window.onload = function() {
     }
   }
 
-  document.onmousemove = function(e) {
+  document.onmousemove = (e) => {
     let deltaX = e.momentX || e.webkitMovementX || e.mozMovementX || e.movementX;
     let deltaY = e.momentY || e.webkitMovementY || e.mozMovementY || e.movementY;
     const radian = Math.PI / 180;
