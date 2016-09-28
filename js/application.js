@@ -6,7 +6,7 @@ window.onload = () => {
   let renderer = new THREE.WebGLRenderer({antialias: true});
   let scene = new THREE.Scene();
   let camera = new THREE.PerspectiveCamera(40, 800 / 480);
-  let cube = new THREE.CubeGeometry(1, 1, 1);
+  let cube = new THREE.BoxGeometry(1, 1, 1);
   let light = new THREE.AmbientLight(0xffffff);
   let updateCanvas = () => {
     requestAnimationFrame(updateCanvas);
