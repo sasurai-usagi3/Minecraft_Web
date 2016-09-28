@@ -1,4 +1,5 @@
-var BlockBedrock = function() {
-  Block.call(this, "bedrock");
-  Object.setPrototypeOf(BlockBedrock.prototype, Block.prototype);
+class BlockBedrock extends Block {
+  constructor() {
+    super("bedrock");
+  }
 }
