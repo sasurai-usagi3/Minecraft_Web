@@ -1,8 +1,8 @@
 window.onload = () => {
-  let posX = 0, posY = 0, posZ = 0;
-  let yaw = 0, pitch = 0;
-  let SightX = 1, SightY = 0, SightZ = 0;
-  let moveX = 1, moveZ = 0;
+  let [posX, posY, posZ] = [0, 0, 0];
+  let [yaw, pitch] = [0, 0];
+  let [SightX, SightY, SightZ] = [1, 0, 0];
+  let [moveX, moveZ] = [1, 0];
   let renderer = new THREE.WebGLRenderer({antialias: true});
   let scene = new THREE.Scene();
   let camera = new THREE.PerspectiveCamera(40, 800 / 480);
@@ -73,11 +73,8 @@ window.onload = () => {
       pitch = -90;
     }
 
-    SightX = Math.cos(radian * pitch) * Math.cos(radian * yaw);
-    SightY = Math.sin(radian* pitch);
-    SightZ = Math.cos(radian * pitch) * Math.sin(radian * yaw);
-    moveX = Math.cos(radian * yaw);
-    moveZ = Math.sin(radian * yaw);
+    [SightX, SightY, SightZ] = [Math.cos(radian * pitch) * Math.cos(radian * yaw), Math.sin(radian* pitch), Math.cos(radian * pitch) * Math.sin(radian * yaw)];
+    [moveX, moveZ] = [Math.cos(radian * yaw), Math.sin(radian * yaw)];
   }
 
   updateCanvas(); 
