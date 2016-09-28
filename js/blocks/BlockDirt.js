@@ -5,8 +5,8 @@ class BlockDirt extends Block {
   }
 
   registerTextures() {
-    for(var i = 0; i < 6; ++i) {
-      var texture = new THREE.TextureLoader().load("/img/textures/blocks/" + this.name + "_" + i + ".png");
+    for(let i = 0; i < 6; ++i) {
+      let texture = new THREE.TextureLoader().load("/img/textures/blocks/" + this.name + "_" + i + ".png");
       this.textures.push(new THREE.MeshBasicMaterial({color: 0xffffff, map: texture}));
     }
   }

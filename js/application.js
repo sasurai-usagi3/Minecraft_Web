@@ -1,14 +1,14 @@
 window.onload = function() {
-  var posX = 0, posY = 0, posZ = 0;
-  var yaw = 0, pitch = 0;
-  var SightX = 1, SightY = 0, SightZ = 0;
-  var moveX = 1, moveZ = 0;
-  var renderer = new THREE.WebGLRenderer({antialias: true});
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(40, 800 / 480);
-  var cube = new THREE.CubeGeometry(1, 1, 1);
-  var light = new THREE.AmbientLight(0xffffff);
-  var updateCanvas = function() {
+  let posX = 0, posY = 0, posZ = 0;
+  let yaw = 0, pitch = 0;
+  let SightX = 1, SightY = 0, SightZ = 0;
+  let moveX = 1, moveZ = 0;
+  let renderer = new THREE.WebGLRenderer({antialias: true});
+  let scene = new THREE.Scene();
+  let camera = new THREE.PerspectiveCamera(40, 800 / 480);
+  let cube = new THREE.CubeGeometry(1, 1, 1);
+  let light = new THREE.AmbientLight(0xffffff);
+  let updateCanvas = function() {
     requestAnimationFrame(updateCanvas);
 
     camera.position.set(posX, posY + 1.6, posZ);
@@ -21,11 +21,11 @@ window.onload = function() {
   document.getElementById("canvas_wrapper").appendChild(renderer.domElement);
 
 
-  for(var x = -3; x <= 3; ++x) {
-    for(var z = -3; z <= 3; ++z) {
-      var meshDirt = new THREE.Mesh(cube, Blocks.dirt.getMaterial());
-      var meshRock = new THREE.Mesh(cube, Blocks.rock.getMaterial());
-      var meshBedrock = new THREE.Mesh(cube, Blocks.bedrock.getMaterial());
+  for(let x = -3; x <= 3; ++x) {
+    for(let z = -3; z <= 3; ++z) {
+      let meshDirt = new THREE.Mesh(cube, Blocks.dirt.getMaterial());
+      let meshRock = new THREE.Mesh(cube, Blocks.rock.getMaterial());
+      let meshBedrock = new THREE.Mesh(cube, Blocks.bedrock.getMaterial());
 
       meshDirt.position.set(x, 0, z);
       meshRock.position.set(x, -1, z);
@@ -60,9 +60,9 @@ window.onload = function() {
   }
 
   document.onmousemove = function(e) {
-    var deltaX = e.momentX || e.webkitMovementX || e.mozMovementX || e.movementX;
-    var deltaY = e.momentY || e.webkitMovementY || e.mozMovementY || e.movementY;
-    var radian = Math.PI / 180;
+    let deltaX = e.momentX || e.webkitMovementX || e.mozMovementX || e.movementX;
+    let deltaY = e.momentY || e.webkitMovementY || e.mozMovementY || e.movementY;
+    const radian = Math.PI / 180;
 
     yaw += deltaX / 0.8;
     pitch -= deltaY / 0.8;
