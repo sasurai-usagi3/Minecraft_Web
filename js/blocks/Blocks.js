@@ -1,4 +1,5 @@
 const Blocks = {
+  air: new BlockAir(),
   dirt: new BlockDirt(),
   rock: new BlockRock(),
   bedrock: new BlockBedrock()
