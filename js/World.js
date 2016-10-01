@@ -24,4 +24,8 @@ class World {
   getBlock(x, y, z) {
     return this.blocksAroundPlayer[x][z][y];
   }
+
+  setBlock(x, y, z, block) {
+    this.blocksAroundPlayer[x][z][y] = block;
+  }
 }
