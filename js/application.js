@@ -1,5 +1,5 @@
 window.onload = () => {
-  let [posX, posY, posZ] = [0, 0, 0];
+  let [posX, posY, posZ] = [0, 64, 0];
   let [yaw, pitch] = [0, 0];
   let [sightX, sightY, sightZ] = [1, 0, 0];
   let [moveX, moveZ] = [1, 0];
@@ -8,6 +8,7 @@ window.onload = () => {
   let camera = new THREE.PerspectiveCamera(40, 800 / 480);
   let cube = new THREE.BoxGeometry(1, 1, 1);
   let light = new THREE.AmbientLight(0xffffff);
+  let world = new World();
   let updateCanvas = () => {
     requestAnimationFrame(updateCanvas);
 
@@ -21,19 +22,14 @@ window.onload = () => {
   document.getElementById("canvas_wrapper").appendChild(renderer.domElement);
 
 
-  for(let x = -3; x <= 3; ++x) {
-    for(let z = -3; z <= 3; ++z) {
-      let meshDirt = new THREE.Mesh(cube, Blocks.dirt.getMaterial());
-      let meshRock = new THREE.Mesh(cube, Blocks.rock.getMaterial());
-      let meshBedrock = new THREE.Mesh(cube, Blocks.bedrock.getMaterial());
+  for(let x = 0; x < 16; ++x) {
+    for(let z = 0; z < 16; ++z) {
+      for(let y = 0; y < 256; ++y) {
+        let block = new THREE.Mesh(cube, world.getBlock(x, y, z).getMaterial());
 
-      meshDirt.position.set(x, 0, z);
-      meshRock.position.set(x, -1, z);
-      meshBedrock.position.set(x, -2, z);
-      
-      scene.add(meshDirt);
-      scene.add(meshRock);
-      scene.add(meshBedrock);
+        block.position.set(x, y, z);
+        scene.add(block);
+      }
     }
   }
 
