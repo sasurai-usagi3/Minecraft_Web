@@ -1,32 +1,33 @@
 class Rendering {
-  constructor(canvasId, world) {
+  constructor(canvasId, targetWorld) {
     this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(40, 800 / 480);
     this.renderer.setSize(800, 480);
     this.renderer.setClearColor(0xffffff);
     this.meshes = [];
+    this.world = targetWorld;
     document.getElementById(canvasId).appendChild(this.renderer.domElement);
-    this.init(world);
+    this.init();
     this.update();
   } 
 
-  init(world) {
+  init() {
     let light = new THREE.AmbientLight(0xffffff);
     this.cube = new THREE.BoxGeometry(1, 1, 1);
     [this.posX, this.posY, this.posZ] = [0, 64, 0];
     [this.sightX, this.sightY, this.sightZ] = [1, 0, 0];
     this.scene.add(light);
-    this.resetWorld(world);
+    this.resetWorld();
   }
 
-  resetWorld(world) {
+  resetWorld() {
     for(let x = 0; x < 16; ++x) {
       this.meshes[x] = [];
       for(let z = 0; z < 16; ++z) {
         this.meshes[x][z] = [];
         for(let y = 0; y < 256; ++y) {
-          let block = new THREE.Mesh(this.cube, world.getBlock(x, y, z).getMaterial());
+          let block = new THREE.Mesh(this.cube, this.world.getBlock(x, y, z).getMaterial());
 
           block.position.set(x, y, z);
           this.meshes[x][z][y] = block;
@@ -60,8 +61,8 @@ class Rendering {
     [this.sightX, this.sightY, this.sightZ] = [x, y, z];
   }
 
-  updateMesh(x, y, z, world) {
-    let block = new THREE.Mesh(this.cube, world.getBlock(x, y, z).getMaterial());
+  updateMesh(x, y, z) {
+    let block = new THREE.Mesh(this.cube, this.world.getBlock(x, y, z).getMaterial());
     
     block.position.set(x, y, z);
     this.scene.remove(this.meshes[x][z][y]);
