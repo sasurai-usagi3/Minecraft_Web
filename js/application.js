@@ -1,9 +1,7 @@
 window.onload = () => {
   let world = new World();
   let rendering = new Rendering("canvas_wrapper", world);
-  let [posX, posY, posZ] = [0, 64, 0];
   let [yaw, pitch] = [0, 0];
-  let [sightX, sightY, sightZ] = [1, 0, 0];
   let [moveX, moveZ] = [1, 0];
 
   document.onkeydown = (e) => {
