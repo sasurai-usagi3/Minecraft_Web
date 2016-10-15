@@ -21,14 +21,14 @@ window.onload = () => {
   }
   let getPenetratingPosOnBlock = (x, y, z) => {
     let result = [];
-    result.push(getPositionWhen(1, y));
-    result.push(getPositionWhen(0, x + 1));
-    result.push(getPositionWhen(2, z));
-    result.push(getPositionWhen(0, x));
-    result.push(getPositionWhen(2, z - 1));
-    result.push(getPositionWhen(1, y - 1));
+    result.push(getPositionWhen(1, y + 0.5));
+    result.push(getPositionWhen(0, x + 0.5));
+    result.push(getPositionWhen(2, z + 0.5));
+    result.push(getPositionWhen(0, x - 0.5));
+    result.push(getPositionWhen(2, z - 0.5));
+    result.push(getPositionWhen(1, y - 0.5));
 
-    return result.map(pos => (pos[0] >= x && pos[0] <= x + 1 && pos[1] >= y - 1 && pos[1] <= y && pos[2] >= z - 1 && pos[2] <= z) ? pos : null);
+    return result.map(pos => (pos[0] >= x - 0.5 && pos[0] <= x + 0.5 && pos[1] >= y - 0.5  && pos[1] <= y + 0.5 && pos[2] >= z - 0.5 && pos[2] <= z + 0.5) ? pos : null);
   }    
   let getTargetBlockPos = (x, y, z) => {
     let pos = getPenetratingPosOnBlock(x, y, z);
@@ -38,7 +38,7 @@ window.onload = () => {
       return null;
     }
 
-    if(getDistance([rendering.posX, rendering.posY, rendering.posZ], [x, y, z]) > 10) {
+    if(getDistance([rendering.posX, rendering.posY + 1.6, rendering.posZ], [x, y, z]) > 10) {
       return null;
     }
 
