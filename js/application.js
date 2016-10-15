@@ -29,8 +29,7 @@ window.onload = () => {
     result.push(getPositionWhen(1, y - 1));
 
     return result.map(pos => (pos[0] >= x && pos[0] <= x + 1 && pos[1] >= y - 1 && pos[1] <= y && pos[2] >= z - 1 && pos[2] <= z) ? pos : null);
-  }
-    
+  }    
   let getTargetBlockPos = (x, y, z) => {
     let pos = getPenetratingPosOnBlock(x, y, z);
     let getDistance = (a, b) => Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2));
@@ -39,7 +38,7 @@ window.onload = () => {
       return null;
     }
 
-    if(getDistance([rendering.posX, rendering.posY, rendering.posZ], [x, y, z]) > 3) {
+    if(getDistance([rendering.posX, rendering.posY, rendering.posZ], [x, y, z]) > 10) {
       return null;
     }
 
@@ -61,6 +60,13 @@ window.onload = () => {
 
     return null;
   }
+  let setMarker = (pos) => {
+    if(pos != null) {
+      rendering.showSelectedBlockMarker(pos[0], pos[1], pos[2]);
+    } else {
+      rendering.removeSelectedBlockMarker();
+    }
+  }
 
   document.onkeydown = (e) => {
     if(e.keyCode == 87) {
@@ -77,7 +83,7 @@ window.onload = () => {
       rendering.move(0, 0.3, 0);
     }
 
-    console.log(getTargetBlockPos(Math.floor(rendering.posX), Math.floor(rendering.posY + 1.6), Math.floor(rendering.posZ)));
+    setMarker(getTargetBlockPos(Math.floor(rendering.posX), Math.floor(rendering.posY + 1.6), Math.floor(rendering.posZ)));
   }
 
   document.onmousemove = (e) => {
@@ -96,7 +102,7 @@ window.onload = () => {
 
     rendering.rotate(Math.cos(radian * pitch) * Math.cos(radian * yaw), Math.sin(radian* pitch), Math.cos(radian * pitch) * Math.sin(radian * yaw));
     [moveX, moveZ] = [Math.cos(radian * yaw), Math.sin(radian * yaw)];
-    console.log(getTargetBlockPos(Math.floor(rendering.posX), Math.floor(rendering.posY + 1.6), Math.floor(rendering.posZ)));
+    setMarker(getTargetBlockPos(Math.floor(rendering.posX), Math.floor(rendering.posY + 1.6), Math.floor(rendering.posZ)));
   }
 
 }
