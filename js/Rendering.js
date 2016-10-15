@@ -70,12 +70,18 @@ class Rendering {
     this.meshes[x][z][y] = block;
   }
 
-  showSelectedBlock(x, y, z) {
+  showSelectedBlockMarker(x, y, z) {
     if(this.selectedBlockMarker != undefined) {
       this.scene.remove(this.selectedBlockMarker);
     }
 
     this.selectedBlockMarker = new THREE.EdgesHelper(this.meshes[x][z][y], 0x000000);
     this.scene.add(this.selectedBlockMarker);
+  }
+
+  removeSelectedBlockMarker() {
+    if(this.selectedBlockMarker != undefined) {
+      this.scene.remove(this.selectedBlockMarker);
+    }
   }
 }
