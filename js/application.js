@@ -3,6 +3,9 @@ window.onload = () => {
   let rendering = new Rendering("canvas_wrapper", world);
   let [yaw, pitch] = [0, 0];
   let [moveX, moveZ] = [1, 0];
+  let targetBlockPos = null;
+  let targetBlockSide = null;
+  let thePlayerWork = null;
   let getPositionWhen = (axis, v) => {
     let t = 0;
     switch(axis) {
@@ -42,7 +45,23 @@ window.onload = () => {
       return null;
     }
 
-    if(world.getBlock(x, y, z) != Blocks.air) return [x, y, z];
+    if(world.getBlock(x, y, z) != Blocks.air) {
+      let side = null;
+      if(pos[0] != null && rendering.sightY < 0) {
+        side = 0;
+      } else if(pos[1] != null && rendering.sightX < 0) {
+        side = 1;
+      } else if(pos[2] != null && rendering.sightZ < 0) {
+        side = 2;
+      } else if(pos[3] != null && rendering.sightX > 0) {
+        side = 3;
+      } else if(pos[4] != null && rendering.sightZ > 0) {
+        side = 4;
+      } else if(pos[5] != null && rendering.sightY > 0) {
+        side = 5;
+      }
+      return [[x, y, z], side];
+    }
         
     if(pos[0] != null && rendering.sightY > 0) {
       return getTargetBlockPos(x, y + 1, z);
@@ -60,11 +79,45 @@ window.onload = () => {
 
     return null;
   }
-  let setMarker = (pos) => {
-    if(pos != null) {
+  let setMarker = (info) => {
+    let pos = (info != null) ? info[0] : null;
+    let side = (info != null) ? info[1] : null;
+
+    if(info != null) {
       rendering.showSelectedBlockMarker(pos[0], pos[1], pos[2]);
+      targetBlockPos = [pos[0], pos[1], pos[2]];
+      targetBlockSide = side;
+      if(thePlayerWork == 0) {
+        world.setBlock(pos[0], pos[1], pos[2], Blocks.air);
+        rendering.updateMesh(pos[0], pos[1], pos[2]);
+      } else if(thePlayerWork == 1) {
+        switch(side) {
+          case 0:
+            pos[1] += 1;
+            break;
+          case 1:
+            pos[0] += 1;
+            break;
+          case 2:
+            pos[2] += 1;
+            break;
+          case 3:
+            pos[0] -= 1;
+            break;
+          case 4:
+            pos[2] -= 1;
+            break;
+          case 5:
+            pos[1] -= 1;
+            break;
+        }
+        world.setBlock(pos[0], pos[1], pos[2], Blocks.dirt);
+        rendering.updateMesh(pos[0], pos[1], pos[2]);
+      }
     } else {
       rendering.removeSelectedBlockMarker();
+      targetBlockPos = null;
+      tatgetBlockside = null;
     }
   }
 
@@ -105,4 +158,48 @@ window.onload = () => {
     setMarker(getTargetBlockPos(Math.floor(rendering.posX), Math.floor(rendering.posY + 1.6), Math.floor(rendering.posZ)));
   }
 
+  document.onmousedown = (e) => {
+    if(e.buttons == 1) {
+      thePlayerWork = 0;
+      if(targetBlockPos != null) {
+        world.setBlock(targetBlockPos[0], targetBlockPos[1], targetBlockPos[2], Blocks.air);
+        rendering.updateMesh(targetBlockPos[0], targetBlockPos[1], targetBlockPos[2]);
+      }
+    } else if(e.buttons == 2) {
+      thePlayerWork = 1;
+      if(targetBlockPos != null) {
+        let pos = [targetBlockPos[0], targetBlockPos[1], targetBlockPos[2]];
+        switch(targetBlockSide) {
+          case 0:
+            pos[1] += 1;
+            break;
+          case 1:
+            pos[0] += 1;
+            break;
+          case 2:
+            pos[2] += 1;
+            break;
+          case 3:
+            pos[0] -= 1;
+            break;
+          case 4:
+            pos[2] -= 1;
+            break;
+          case 5:
+            pos[1] -= 1;
+            break;
+        }
+        world.setBlock(pos[0], pos[1], pos[2], Blocks.dirt);
+        rendering.updateMesh(pos[0], pos[1], pos[2]);
+      }
+    }
+  }
+
+  document.oncontextmenu = () => {
+    return false;
+  }
+
+  document.onmouseup = () => {
+    thePlayerWork = null;
+  }
 }
