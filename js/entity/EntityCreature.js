@@ -11,7 +11,7 @@ class EntityCreature extends Entity {
 
   walk(direction) {
     const radian = Math.PI / 180;
-    let moveX = Math.cos(radian * this.yaw), moveZ = Math.sin(radian * this.pitch);
+    let moveX = 10 * Math.cos(radian * this.yaw), moveZ = 10 * Math.sin(radian * this.yaw);
     
     if(direction == 0) {
       this.vx = moveX;
