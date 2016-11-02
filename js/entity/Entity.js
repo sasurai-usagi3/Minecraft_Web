@@ -20,7 +20,7 @@ class Entity {
   }
 
   update() {
-    if(true) {
+    if(this.needToUpdate) {
       this.nextX = this.x + this.vx * this.updateInterval / 1000;
       this.nextY = this.y + this.vy * this.updateInterval / 1000;
       this.nextZ = this.z + this.vz * this.updateInterval / 1000;
