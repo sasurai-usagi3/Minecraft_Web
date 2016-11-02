@@ -56,7 +56,7 @@ class EntityCreature extends Entity {
     } else if(this.pitch < -90) {
       this.pitch = -90;
     }
-    this.sigthX = Math.cos(radian * this.pitch) * Math.cos(radian * this.yaw);
+    this.sightX = Math.cos(radian * this.pitch) * Math.cos(radian * this.yaw);
     this.sightY = Math.sin(radian * this.pitch);
     this.sightZ = Math.cos(radian * this.pitch) * Math.sin(radian * this.yaw);
   }
