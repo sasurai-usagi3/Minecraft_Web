@@ -21,9 +21,9 @@ class Entity {
 
   update() {
     if(true) {
-      this.nextX += this.vx * this.updateInterval / 1000;
-      this.nextY += this.vy * this.updateInterval / 1000;
-      this.nextZ += this.vz * this.updateInterval / 1000;
+      this.nextX = this.x + this.vx * this.updateInterval / 1000;
+      this.nextY = this.y + this.vy * this.updateInterval / 1000;
+      this.nextZ = this.y + this.vz * this.updateInterval / 1000;
       this.vy -= this.gravity * this.updateInterval / 1000;
     
       if(this.canMove()) {
