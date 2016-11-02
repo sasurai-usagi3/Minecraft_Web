@@ -1,6 +1,6 @@
 class Entity {
   constructor(targetWorld, posX, posY, posZ) {
-    this.gravity = 9.8;
+    this.gravity = 9800;
     this.updateInterval = 1;
     this.needToUpdate = true;
     this.world = targetWorld;
