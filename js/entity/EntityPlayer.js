@@ -91,9 +91,43 @@ class EntityPlayer extends EntityCreature {
   }
 
 
-  digBlock() {
+  destroyBlock() {
+    if(this.target == null) {
+      return null;
+    }
+
+    let blockPos = this.target[0];
+    this.world.setBlock(blockPos[0], blockPos[1], blockPos[2], Blocks.air);
+    return blockPos;
   }
 
   putBlock() {
+    if(this.target == null) {
+      return null;
+    }
+    let pos = [this.target[0][0], this.target[0][1], this.target[0][2]];
+    let side = this.target[1];
+    switch(side) {
+      case 0:
+        pos[1] += 1;
+        break;
+      case 1:
+        pos[0] += 1;
+        break;
+      case 2:
+        pos[2] += 1;
+        break;
+      case 3:
+        pos[0] -= 1;
+        break;
+      case 4:
+        pos[2] -= 1;
+        break;
+      case 5:
+        pos[1] -= 1;
+        break;
+    }
+    this.world.setBlock(pos[0], pos[1], pos[2], Blocks.dirt);
+    return pos;
   }
 }
