@@ -41,9 +41,9 @@ class EntityCreature extends Entity {
 
   fly(direction) {
     if(direction == 0) {
-      this.posY += 0.3;
+      this.y += 0.3;
     } else if(direction == 1) {
-      this.posY -= 0.3;
+      this.y -= 0.3;
     }
   }
 
