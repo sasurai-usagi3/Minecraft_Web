@@ -56,5 +56,9 @@ class EntityCreature extends Entity {
   isOnGround() {
     return true;
   }
+
+  getEyeSight() {
+    const radian = Math.PI / 180;
+    return [Math.cos(radian * this.pitch) * Math.cos(radian * this.yaw), Math.sin(radian * this.pitch), Math.cos(radian * this.pitch) * Math.sin(radian * this.yaw)];
+  }
 }
-    
