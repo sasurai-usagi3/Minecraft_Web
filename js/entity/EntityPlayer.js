@@ -1,6 +1,6 @@
 class EntityPlayer extends EntityCreature {
-  constructor(posX, posY, posZ) {
-    super(posX, posY, posZ);
+  constructor(currentWorld, posX, posY, posZ) {
+    super(currentWorld, posX, posY, posZ);
     this.width = 0.6;
     this.height = 1.7;
   }

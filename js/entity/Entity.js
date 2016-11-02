@@ -1,8 +1,9 @@
 class Entity {
-  constructor(posX, posY, posZ) {
+  constructor(currentWorld, posX, posY, posZ) {
     this.gravity = 9.8;
     this.updateInterval = 1;
     this.needToUpdate = true;
+    this.world = currentWorld;
     this.x = posX;
     this.y = posY;
     this.z = posZ;

@@ -1,6 +1,6 @@
 class EntityCreature extends Entity {
-  constructor(posX, posY, posZ) {
-    super(posX, posY, posZ);
+  constructor(currentWorld, posX, posY, posZ) {
+    super(currentWorld, posX, posY, posZ);
     this.pitch = 0;
     this.yaw = 0
   }
