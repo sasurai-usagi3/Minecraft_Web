@@ -4,7 +4,6 @@ class EntityPlayer extends EntityCreature {
     this.width = 0.6;
     this.height = 1.7;
     this.target = null;
-    this.work = null;
   }
 
   update() {

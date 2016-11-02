@@ -6,7 +6,6 @@ class EntityCreature extends Entity {
     this.sightX = 1;
     this.sightY = 0;
     this.sightZ = 0;
-    this.walking = false;
   }
 
   walk(direction) {
