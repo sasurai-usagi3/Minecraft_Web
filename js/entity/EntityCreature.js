@@ -3,6 +3,9 @@ class EntityCreature extends Entity {
     super(targetWorld, posX, posY, posZ);
     this.pitch = 0;
     this.yaw = 0
+    this.sightX = 1;
+    this.sightY = 0;
+    this.sightZ = 0;
   }
 
   walk(direction) {
@@ -44,6 +47,7 @@ class EntityCreature extends Entity {
   }
 
   rotate(deltaYaw, deltaPitch) {
+    const radian = Math.PI / 180;
     this.yaw += deltaYaw;
     this.pitch -= deltaPitch;
     if(this.pitch > 90) {
@@ -51,6 +55,9 @@ class EntityCreature extends Entity {
     } else if(this.pitch < -90) {
       this.pitch = -90;
     }
+    this.sigthX = Math.cos(radian * this.pitch) * Math.cos(radian * this.yaw);
+    this.sightY = Math.sin(radian * this.pitch);
+    this.sightZ = Math.cos(radian * this.pitch) * Math.sin(radian * this.yaw);
   }
 
   isOnGround() {
@@ -58,7 +65,6 @@ class EntityCreature extends Entity {
   }
 
   getEyeSight() {
-    const radian = Math.PI / 180;
-    return [Math.cos(radian * this.pitch) * Math.cos(radian * this.yaw), Math.sin(radian * this.pitch), Math.cos(radian * this.pitch) * Math.sin(radian * this.yaw)];
+    return [this.sightX, this.sightY, this.sightZ];
   }
 }
