@@ -6,6 +6,7 @@ class EntityCreature extends Entity {
     this.sightX = 1;
     this.sightY = 0;
     this.sightZ = 0;
+    this.walking = false;
   }
 
   walk(direction) {
@@ -15,21 +16,26 @@ class EntityCreature extends Entity {
     if(direction == 0) {
       this.vx = moveX;
       this.vz = moveZ;
+      this.walking = true;
     } else if(direction == 1) {
       this.vx = -moveZ;
       this.vz = moveX;
+      this.walking = true;
     } else if(direction == 2) {
       this.vx = -moveX;
       this.vz = -moveZ;
+      this.walking = true;
     } else if(direction == 3) {
       this.vx = moveZ;
       this.vz = -moveX;
+      this.walking = true;
     }
   }
 
   stop() {
     this.vx = 0;
     this.vz = 0;
+    this.walking = false;
   }
 
   jump() {
