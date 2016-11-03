@@ -20,7 +20,7 @@ class EntityPlayer extends EntityCreature {
               t = (v - this.y - 0.75) / this.sightY;
               return [this.x + t * this.sightX, v, this.z + t * this.sightZ];
             case 2:
-              t = (v - this.z) / this.z;
+              t = (v - this.z) / this.sightZ;
               return [this.x + t * this.sightX, this.y + 0.75 + t * this.sightY, v];
             default:
               return null;
@@ -33,7 +33,7 @@ class EntityPlayer extends EntityCreature {
         result.push(getPositionWhen(2, blockPosZ - 0.5));
         result.push(getPositionWhen(1, blockPosY - 0.5));
 
-        return result.map(pos => (pos[0] >= blockPosX - 0.5 && pos[0] <= blockPosX + 0.5 && pos[1] >= blockPosY - 0.5  && pos[1] <= blockPosY + 0.5 && pos[2] >= blockPosZ - 0.5 && pos[2] <= blockPosZ + 0.5) ? pos : null);
+        return result.map(pos => (pos[0] >= blockPosX - 0.5 && pos[0] <= blockPosX + 0.5 && pos[1] >= blockPosY - 0.5 && pos[1] <= blockPosY + 0.5 && pos[2] >= blockPosZ - 0.5 && pos[2] <= blockPosZ + 0.5) ? pos : null);
       };    
       let pos = getPenetratingPosOnBlock(targetX, targetY, targetZ);
       let getDistance = (a, b) => Math.sqrt(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2) + Math.pow(a[2] - b[2], 2));
