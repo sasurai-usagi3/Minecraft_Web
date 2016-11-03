@@ -1,5 +1,5 @@
 class Rendering {
-  constructor(canvasId, targetWorld) {
+  constructor(canvasId, targetWorld, targetPlayer) {
     this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(40, 800 / 480);
@@ -7,6 +7,7 @@ class Rendering {
     this.renderer.setClearColor(0xffffff);
     this.meshes = [];
     this.world = targetWorld;
+    this.player = targetPlayer;
     document.getElementById(canvasId).appendChild(this.renderer.domElement);
     this.init();
     this.update();
@@ -15,8 +16,6 @@ class Rendering {
   init() {
     let light = new THREE.AmbientLight(0xffffff);
     this.cube = new THREE.BoxGeometry(1, 1, 1);
-    [this.posX, this.posY, this.posZ] = [0, 64, 0];
-    [this.sightX, this.sightY, this.sightZ] = [1, 0, 0];
     this.scene.add(light);
     this.resetWorld();
   }
@@ -39,26 +38,21 @@ class Rendering {
     
   update() {
     let update = () => {
+      let [cameraX, cameraY, cameraZ] = this.player.getEyeSight();
       requestAnimationFrame(update);
-      this.camera.position.set(this.posX, this.posY + 1.6, this.posZ);
-      this.camera.lookAt(new THREE.Vector3(this.posX + this.sightX, this.posY + 1.6 + this.sightY, this.posZ + this.sightZ));
+      this.camera.position.set(this.player.x, this.player.y + 0.75, this.player.z);
+      this.camera.lookAt(new THREE.Vector3(this.player.x + cameraX, this.player.y + cameraY + 0.75, this.player.z + cameraZ));
+      if(this.player.target != null) {
+        let info = this.player.target;
+        let pos = (info != null) ? info[0] : null;
+        let side = (info != null) ? info[1] : null;
+        this.showSelectedBlockMarker(pos[0], pos[1], pos[2]);
+      } else {
+        this.removeSelectedBlockMarker();
+      }
       this.renderer.render(this.scene, this.camera);
     };
     update();
-  }
-
-  move(deltaX, deltaY, deltaZ) {
-    this.posX += deltaX;
-    this.posY += deltaY;
-    this.posZ += deltaZ;
-  }
-
-  moveTo(newX, newY, newZ) {
-    [this.posX, this.posY, this.posZ] = [newX, newY, newZ];
-  }
-
-  rotate(x, y, z) {
-    [this.sightX, this.sightY, this.sightZ] = [x, y, z];
   }
 
   updateMesh(x, y, z) {
