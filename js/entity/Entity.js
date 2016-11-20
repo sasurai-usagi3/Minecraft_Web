@@ -22,7 +22,7 @@ class Entity {
   update() {
     if(this.needToUpdate) {
       this.nextX = this.x + this.vx * this.updateInterval / 1000;
-      this.nextY = this.y + this.vy * this.updateInterval / 1000;
+      this.nextY = (this.isOnGround()) ? this.y : this.y + this.vy * this.updateInterval / 1000;
       this.nextZ = this.z + this.vz * this.updateInterval / 1000;
       this.vy -= this.gravity * this.updateInterval / 1000;
     
@@ -30,17 +30,34 @@ class Entity {
         this.x = this.nextX;
         this.y = this.nextY;
         this.z = this.nextZ;
+      } else {
+        this.vx = 0;
+        this.vy = 0;
+        this.vz = 0;
       }
     }
     setTimeout(() => this.update(), this.updateInterval);
   }
 
   canMove() {
+    let diag = Math.sqrt(2) * this.width / 2;
+    let entityModel = this.getBoundaryBox();
+
+    for(let x = Math.round(this.nextX - diag); x < Math.round(this.nextX + diag); ++x) {
+      for(let z = Math.round(this.nextZ - diag); z < Math.round(this.nextZ + diag); ++z) {
+        for(let y = Math.round(this.nextY - this.height / 2); y < Math.round(this.nextY + this.height / 2); ++y) {
+          let block = this.world.getBlock(x, y, z);
+          if(block != null && block != Blocks.air && entityModel.doseCollide(block.getBoundaryBox(x, y, z))) {
+            return false;
+          }
+        }
+      }
+    }
     return true;
   }
 
   isOnGround() {
-    return true;
+    return this.world.getBlock(Math.round(this.x), Math.round(this.y - this.height / 2) - 1, Math.round(this.z)) != Blocks.air;
   }
 
   getBoundaryBox() {

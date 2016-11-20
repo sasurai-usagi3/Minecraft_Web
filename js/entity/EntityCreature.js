@@ -60,10 +60,6 @@ class EntityCreature extends Entity {
     this.sightZ = Math.cos(radian * this.pitch) * Math.sin(radian * this.yaw);
   }
 
-  isOnGround() {
-    return true;
-  }
-
   getEyeSight() {
     return [this.sightX, this.sightY, this.sightZ];
   }

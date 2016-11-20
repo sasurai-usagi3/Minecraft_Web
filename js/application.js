@@ -1,5 +1,5 @@
 let world = new World();
-let player = new EntityPlayer(world, 0, 64.85, 0);
+let player = new EntityPlayer(world, 0, 65.35, 0);
 let rendering = new Rendering(world, player);
 let mouseButtons = 0;
 let destroyOrPutBlock = (mode) => {
@@ -16,8 +16,8 @@ let destroyOrPutBlock = (mode) => {
   }
 };
 
-player.gravity = 0;
-player.vy = 0
+//player.gravity = 0;
+//player.vy = 0
 
 window.addEventListener("keydown", (e) => {
   if(e.keyCode == 87) {

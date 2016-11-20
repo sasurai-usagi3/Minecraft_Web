@@ -22,7 +22,11 @@ class World {
   }
 
   getBlock(x, y, z) {
-    return this.blocksAroundPlayer[x][z][y];
+    try {
+      return this.blocksAroundPlayer[x][z][y];
+    } catch(e) {
+      return null;
+    }
   }
 
   setBlock(x, y, z, block) {
