@@ -1,5 +1,7 @@
 class Rendering {
-  constructor(canvasId, targetWorld, targetPlayer) {
+  constructor(targetWorld, targetPlayer) {
+    let light = new THREE.AmbientLight(0xffffff);
+
     this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(40, 800 / 480);
@@ -8,15 +10,13 @@ class Rendering {
     this.meshes = [];
     this.world = targetWorld;
     this.player = targetPlayer;
-    document.getElementById(canvasId).appendChild(this.renderer.domElement);
-    this.init();
+    this.cube = new THREE.BoxGeometry(1, 1, 1);
+    this.scene.add(light);
     this.update();
   } 
 
-  init() {
-    let light = new THREE.AmbientLight(0xffffff);
-    this.cube = new THREE.BoxGeometry(1, 1, 1);
-    this.scene.add(light);
+  init(canvasId) {
+    document.getElementById(canvasId).appendChild(this.renderer.domElement);
     this.resetWorld();
   }
 
