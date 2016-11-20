@@ -57,7 +57,8 @@ class Entity {
   }
 
   isOnGround() {
-    return this.world.getBlock(Math.round(this.x), Math.round(this.y - this.height / 2) - 1, Math.round(this.z)) != Blocks.air;
+    let block = this.world.getBlock(Math.round(this.x), Math.round(this.y - this.height / 2) - 1, Math.round(this.z));
+    return block != null && block != Blocks.air;
   }
 
   getBoundaryBox() {
