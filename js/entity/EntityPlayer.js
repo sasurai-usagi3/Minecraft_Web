@@ -81,7 +81,7 @@ class EntityPlayer extends EntityCreature {
       return null;
     }
 
-    this.target = getTargetBlockPos(Math.floor(this.x), Math.floor(this.y + 0.75), Math.floor(this.z));
+    this.target = getTargetBlockPos(Math.round(this.x), Math.round(this.y + 0.75), Math.round(this.z));
     super.update();
   } 
 
