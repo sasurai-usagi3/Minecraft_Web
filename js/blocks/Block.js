@@ -14,4 +14,8 @@ class Block {
   getMaterial() {
     return this.material;
   }
+
+  getBoundaryBox(x, y, z) {
+    return new CubeModel(new Vector3D(x, y, z), 1, 1, 1); 
+  }
 }

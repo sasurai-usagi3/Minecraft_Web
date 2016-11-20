@@ -42,4 +42,8 @@ class Entity {
   isOnGround() {
     return true;
   }
+
+  getBoundaryBox() {
+    return new CubeModel(new Vector3D(this.x, this.y, this.z), this.width, this.width, this.height);
+  }
 }
